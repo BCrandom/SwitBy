@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwitBy | Crear</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+    <%- include('../partials/header') %>
+
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-light text-black shadow-lg" style="border-radius: 1rem;" id="full-card">
+                <div class="card-body p-5 text-center">
+
+                    <div class="mb-md-4 mt-md-4">
+
+                    <h2 class="fw-bold mb-3 text-uppercase" style="color: #9D7AD4;">Crear Post</h2>
+
+                    <form action="/createPost" method="post">
+
+                        <div data-mdb-input-init class="form-outline form-white mb-4">
+                            <label class="form-label" for="title">Titulo</label>
+                            <input type="text" name="title" id="title" class="form-control form-control-lg">
+                        </div>
+
+                        <div data-mdb-input-init class="form-outline form-white mb-4">
+                            <label class="form-label" for="content">Contenido</label>
+                            <textarea name="content" id="content" class="form-control form-control-lg"></textarea>
+                        </div>
+
+                        <div data-mdb-input-init class="form-outline form-white mb-4">
+                            <label class="form-label" for="category">Categoria</label>
+                            <input type="number" name="category" id="category" class="form-control form-control-lg">
+                        </div>
+
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg px-5" id="btn-outline-lila" type="submit">Crear</button>
+                    </form>
+
+                    </div>
+
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

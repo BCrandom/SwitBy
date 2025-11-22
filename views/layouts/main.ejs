@@ -20,7 +20,7 @@
 
         <div class="d-flex gap-2">
             
-            <a href="#" class="btn btn-outline-dark fw-bold">
+            <a href="/createPost" class="btn btn-outline-dark fw-bold">
                 Crear
             </a>
             
@@ -46,42 +46,53 @@
         <section id="perfil-feed" class="col-12 col-md-9 p-3 bg-light">
             
             <h4 class="mb-3">Tu Feed:</h4>
+
+            <% if (posts)  { %>
+                <% posts.forEach(function(post) { %>
             
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-2">
-                        <h2 class="h5 card-title mb-0 fw-bold">User - Dayana Figueroa</h2>
-                        <p class="text-muted small mb-0">(hace 2 horas)</p>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div>
+                                <h1 class="h4 card-title mb-0 fw-bold"><%- post.name %></h1>
+                                <% if (post.user_id == user.id) { %> <!-- esto es provisional para probar validaciones para que no se puedan borrar posts de otras personas xd -->
+                                    <div class="dropdown" id="post-functions">
+                                    <a
+                                        href="#"
+                                        class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        ... <!-- poner aqui el icono de los 3 puntos en vertical -->
+                                    </a>
+                                    <ul class="dropdown-menu text-small">
+                                        <li><a class="dropdown-item" href="#">Editar</a></li>
+                                        <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                    </ul>
+                                </div>
+                                <% } %>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <h2 class="h5 card-title mb-0 fw-bold"><%- post.title %></h2>
+                                <p class="text-muted small mb-0"><%- post.creationDate %></p>
+                            </div>
+                            <p class="card-text">
+                                <%- post.content %>
+                            </p>
+                        </div>
                     </div>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores perspiciatis id quo mayores commodi! Sapiente repellendus quo, hic ipsa, atque blanditiis ratione labore mollitia consequuntur numquam, aspernatur velit vel aliquam.
-                    </p>
-                </div>
-            </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-2">
-                        <h2 class="h5 card-title mb-0 fw-bold">User - Barbara Correa</h2>
-                        <p class="text-muted small mb-0">(hace 2 horas)</p>
-                    </div>
-                    <p class="card-text">
-                        En un grupo de amigos siempre hay un little hope, y si no lo reconoces, es porque el little hope eres tu.
-                    </p>
-                </div>
-            </div>
+                <% }); %>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-2">
-                        <h2 class="h5 card-title mb-0 fw-bold">User - Alejandro Hernandez</h2>
-                        <p class="text-muted small mb-0">(hace 2 horas)</p>
-                    </div>
-                    <p class="card-text">
-                        Tema: Porque las personas odian de manera injustificada a Linux y porque Linux es el sistema operativo definitivo.
-                    </p>
+            <% } else { %>
+
+                <div>
+                    
+                    <h2>Vacio</h2>
+
                 </div>
-            </div>
+
+            <% } %>
+
         <!-- En el futuro, cuando tengamos datos circulando desde los posteos, haremos un solo div de post, con un ciclo for, ya que tendrá un backend ejecutando consultas a la base de datos-->
         </section>
     </div>

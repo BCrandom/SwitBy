@@ -40,7 +40,8 @@ app.use(sessionRoute_1.default);
 app.use(mainRoute_1.default);
 // Rutas principales
 app.get("/", (req, res) => {
-    res.send("Bienvenido");
+    //res.send("Bienvenido");
+    res.render("principal");
 });
 // Ruta para la escritura incorrecta de la URL
 app.use((req, res, next) => {

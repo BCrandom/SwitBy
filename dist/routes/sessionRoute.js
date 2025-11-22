@@ -9,4 +9,5 @@ router.get('/session', (req, res) => {
     res.render('auth/login');
 });
 router.post('/session', (req, res) => manejoSession.loginUser(req, res));
+router.get('/logout', (req, res) => { manejoSession.logoutUser(req, res); });
 exports.default = router;

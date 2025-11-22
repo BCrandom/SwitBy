@@ -37,7 +37,17 @@ class SessionController {
             /* return res.status(200).json({
               message: 'Inicio de sesión exitoso :D', user: req.session.user
             }); */
-            return res.render('layouts/main', { user: req.session.user });
+            res.redirect('/main');
+        });
+    }
+    logoutUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            req.session.destroy((err) => {
+                if (err) {
+                    return console.log("Error:", err);
+                }
+                res.redirect('/session');
+            });
         });
     }
 }
