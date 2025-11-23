@@ -11,4 +11,6 @@ router.get('/session', (req: Request, res: Response) => {
 
 router.post('/session', (req: Request, res: Response) => manejoSession.loginUser(req, res));
 
+router.get('/logout', (req: Request, res: Response) => {manejoSession.logoutUser(req, res)});
+
 export default router;

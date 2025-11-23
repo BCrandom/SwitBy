@@ -1,14 +1,23 @@
 import { Request, Response } from 'express';
 import { initializeDB } from '../db';
+import { mostrarPost } from "../controllers/postController";
 
 export class UserController {
 
-  async getMain (req: Request, res: Response){
-    res.status(200).render("layouts/main", { user: req.session.user });
+  async getMain (req: Request, res: Response) {
+    try {
+      const verPost = await mostrarPost();
+      res.status(200).render("layouts/main", { 
+        user: req.session.user,
+        posts: verPost
+      });
+    } catch (error) {
+      console.log("Error: ", error)
+    }
   }
 
   async getCreatePost (req: Request, res: Response){
-    res.status(200).render("posts/createPost");
+    res.status(200).render("post/create");
   }
 
   async postCreatePost (req: Request, res: Response){
@@ -23,14 +32,14 @@ export class UserController {
       return res.status(400).send("Faltan datos obligatorios");
     }
 
-    try{
+    try {
       const db = await initializeDB();
       const stmt = await db.prepare(`INSERT INTO publicaciones (title, content, user_id, category_id) VALUES (?, ?, ?, ?)`);
       await stmt.run(title, content, userID, category);
       await stmt.finalize();
 
       res.status(201).send("Publicación creada exitosamente");
-    } catch (e){
+    } catch (e) {
       console.error(e);
       res.status(500).send("Error al crear la publicación");
     }

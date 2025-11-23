@@ -37,4 +37,13 @@ export class SessionController{
     res.redirect('/main')
     
   }
+
+  async logoutUser(req: Request, res: Response) {
+    req.session.destroy((err) => {
+    if (err) {
+      return console.log("Error:", err);
+    }
+    res.redirect('/session');
+  });
+  }
 }

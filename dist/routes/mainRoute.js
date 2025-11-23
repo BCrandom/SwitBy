@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const mainController_1 = require("../controllers/mainController");
 const router = (0, express_1.Router)();
-router.get("/main", (req, res) => {
-    res.render("layouts/main");
-});
+const mainController = new mainController_1.UserController();
+router.get("/main", (req, res) => mainController.getMain(req, res));
+router.get("/createPost", (req, res) => mainController.getCreatePost(req, res));
+router.post("/createPost", (req, res) => mainController.postCreatePost(req, res));
 exports.default = router;

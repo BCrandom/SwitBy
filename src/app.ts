@@ -45,7 +45,8 @@ app.use(mainRouter);
 
 // Rutas principales
 app.get("/", (req: Request, res: Response) => {
-  res.send("Bienvenido");
+  //res.send("Bienvenido");
+  res.render("principal")
 });
 
 // Ruta para la escritura incorrecta de la URL
