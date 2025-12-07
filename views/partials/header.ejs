@@ -1,17 +1,18 @@
-<header class="p-3 border-bottom">
+<header class="p-3 border-bottom bg-white">
   <div class="container">
-    <div
-      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-    >
-      <div class="d-flex align-items-center SwitBy-Logo me-3 me-auto">
+    <div class="d-flex flex-wrap align-items-center justify-content-between">
+      
+      <!-- LOGO Y TÍTULO (Izquierda) -->
+      <a href="/main" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none me-auto">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           id="SwitBy-Paloma"
           version="1.0"
-          width="50px"
-          height="57px"
+          width="40px" 
+          height="45px" 
           viewBox="0 0 476.000000 476.000000"
           preserveAspectRatio="xMinYMid meet"
+          class="me-2"
         >
           <g
             transform="translate(0.000000,476.000000) scale(0.100000,-0.100000)"
@@ -28,43 +29,51 @@
             />
           </g>
         </svg>
-        <h1 id="SwitBy-Title">SwitBy</h1>
-      </div>
+        <h1 id="SwitBy-Title" class="fs-4 fw-bold m-0">SwitBy</h1>
+      </a>
 
-      <div id="header-right" class="d-flex align-items-center">
-        <div id="header-links" class="me-2">
-          <a href="#" class="nav-link px-2 link-body-emphasis">
+      <!-- PARTE DERECHA: Notificaciones + Usuario + Logout -->
+      <div id="header-right" class="d-flex align-items-center gap-3">
+        
+        <!-- Notificaciones -->
+        <a href="#" class="nav-link text-secondary position-relative">
+            <!-- Opción A: Tu imagen -->
+            <!-- <img src="imgs/campana.png" alt="Notificaciones" width="24px" /> -->
+            
+            <!-- Opción B: Icono Bootstrap (Recomendado) -->
+            <i class="bi bi-bell fs-4"></i>
+            
+            <!-- Badge de notificación (opcional) -->
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+            </span>
+        </a>
+
+        <!-- Separador vertical -->
+        <div class="vr mx-2"></div>
+
+        <!-- Información del Usuario (Solo visual) -->
+        <div class="d-flex align-items-center gap-2">
+            <span class="fw-bold d-none d-md-block text-dark">
+                <%= user ? user.username : 'Invitado' %>
+            </span>
             <img
-              src="imgs/campana.png"
-              id="perfil-notificaciones"
-              alt="Campana sobre campana"
-              width="30px"
+              src="<%= user && user.avatar ? user.avatar : 'imgs/Logo.png' %>"
+              alt="<%= user ? user.username : 'User' %>"
+              width="40"
+              height="40"
+              class="rounded-circle border"
+              style="object-fit: cover;"
             />
-          </a>
         </div>
 
-        <div class="dropdown">
-          <a
-            href="#"
-            class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img
-              src="https://github.com/mdo.png"
-              alt="mdo"
-              width="50"
-              height="50"
-              class="rounded-circle"
-            />
-          </a>
-          <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="/main">Main</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
-          </ul>
-        </div>
+        <!-- BOTÓN DE LOGOUT ÚNICO -->
+        <!-- Apunta a la ruta definida en authRoutes.ts -->
+        <a href="/logout" class="btn btn-outline-danger btn-sm fw-bold ms-2 d-flex align-items-center gap-2">
+            <i class="bi bi-box-arrow-right"></i>
+            <span class="d-none d-sm-inline">Salir</span>
+        </a>
+
       </div>
     </div>
   </div>

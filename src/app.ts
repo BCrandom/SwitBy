@@ -21,6 +21,7 @@ app.set("view engine", "ejs");
 app.use(favicon(path.join(__dirname, '../views/public/imgs', 'favicon.ico')));
 
 // Middlewares
+app.use('/images', express.static(path.join(__dirname, '../views/public/imgs')));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
