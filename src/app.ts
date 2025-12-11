@@ -38,11 +38,13 @@ app.use(
 import registerRouter from "./routes/registerRoute";
 import sessionRouter from "./routes/sessionRoute";
 import mainRouter from "./routes/mainRoute";
+import userRouter from "./routes/userRoutes";
 
 // Rutas
 app.use(registerRouter);
 app.use(sessionRouter);
 app.use(mainRouter);
+app.use(userRouter);
 
 // Rutas principales
 app.get("/", (req: Request, res: Response) => {

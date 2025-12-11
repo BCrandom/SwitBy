@@ -1,7 +1,20 @@
-#perfil-opc {
-    background-color: #ffa9ff;
+@font-face {
+    font-family: 'QuattrocentoSans';
+    src: url('../public/fonts/Quattrocento_Sans/QuattrocentoSans-Regular.ttf');
 }
 
-#perfil-publicaciones {
-    margin: 0;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#SwitBy-Title {
+    color: #9D7AD4;
+    font-weight: bolder;
+}
+
+.PalomaIcono {
+    fill: #9D7AD4;
+}
+#SwitBy-Paloma {
+    margin-right: 10px;
 }
