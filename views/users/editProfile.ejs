@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwitBy | Editar Perfil</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Iconos de Bootstrap (Opcional, para el menú de 3 puntos) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+</head>
+<body>
+
+    <div>
+        <h1>Editar Perfil</h1>
+    </div>
+
+    <form action="/profile/editar/<%= id %>" method="post">
+        <label for="username">Nombre de usuario</label>
+        <input type="text" name="username" id="username">
+        <label for="first_name">Primer Nombre</label>
+        <input type="text" name="first_name" id="first_name">
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" id="last_name">
+        <label for="bio">Biografia</label>
+        <textarea name="bio" id="bio"></textarea>
+
+        <button type="submit">Enviar</button>
+        <button type="reset">Borrar</button>
+    </form>
+    
+</body>
+</html>

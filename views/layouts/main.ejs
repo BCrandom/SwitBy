@@ -6,9 +6,8 @@
     <title>SwitBy | Home</title>
     <!-- Estilos: Intenta unificar o usar rutas absolutas -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <!-- Asumo que tienes estilos propios aquí -->
-    <link rel="stylesheet" href="/css/style.css" />
+    
+    <link rel="stylesheet" href="main.css">
 
     <!-- Iconos de Bootstrap (Opcional, para el menú de 3 puntos) -->
     <link
@@ -39,7 +38,7 @@
         <a
           href="/profile/<%= user ? user.id : '' %>"
           class="btn btn-outline-dark fw-bold d-flex align-items-center gap-2"
-        >
+        > <!-- <%= user ? user.id : '' %> -->
           <!-- Mini avatar del usuario en sesión -->
           <img
             src="<%= user && user.avatar ? user.avatar : 'imgs/Logo.png' %>"

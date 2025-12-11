@@ -30,38 +30,55 @@ function createTables() {
     return __awaiter(this, void 0, void 0, function* () {
         const db = yield initializeDB();
         yield db.exec(`
-    
--- 1. Roles
+
+-- 1. Roles (Mejorado: FOREIGN KEY ahora usa ON DELETE RESTRICT para seguridad)
 CREATE TABLE IF NOT EXISTS roles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    kindRol INTEGER NOT NULL UNIQUE DEFAULT 0 --Será 0 para usuarios normales y 1 para administradores
+    rol_name TEXT NOT NULL UNIQUE
 );
 
--- 2. Usuarios
+-- Inserta roles básicos
+INSERT OR IGNORE INTO roles (id, rol_name) VALUES (1, 'Usuario');
+INSERT OR IGNORE INTO roles (id, rol_name) VALUES (2, 'Administrador');
+
+-- 2. Usuarios (Tabla de Cuenta y Seguridad)
 CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     creationDate DATETIME DEFAULT (datetime('now')),
-    rol_id INTEGER,
-    FOREIGN KEY (rol_id) REFERENCES roles(kindRol) ON DELETE SET NULL
+    is_active INTEGER NOT NULL DEFAULT 1,
+    rol_id INTEGER NOT NULL DEFAULT 1,
+    -- Si se intenta borrar un rol que está en uso, la operación fallará
+    FOREIGN KEY (rol_id) REFERENCES roles(id) ON DELETE RESTRICT
 );
 
--- 3. Categorías
+-- 3. Perfiles (Tabla 1:1 para Datos Personales y Públicos)
+CREATE TABLE IF NOT EXISTS perfiles (
+    user_id INTEGER PRIMARY KEY, 
+    username TEXT NOT NULL UNIQUE,
+    first_name TEXT,
+    last_name TEXT,
+    bio TEXT,
+    avatar_url TEXT,
+    last_activity DATETIME DEFAULT (datetime('now')),
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-- 4. Categorías
 CREATE TABLE IF NOT EXISTS categorias (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     categoryName TEXT NOT NULL UNIQUE,
-    description TEXT NOT NULL
+    description TEXT
 );
 
--- 4. Etiquetas
+-- 5. Etiquetas
 CREATE TABLE IF NOT EXISTS etiquetas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nameTag TEXT NOT NULL UNIQUE
 );
 
--- 5. Publicaciones
+-- 6. Publicaciones
 CREATE TABLE IF NOT EXISTS publicaciones (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
@@ -74,7 +91,7 @@ CREATE TABLE IF NOT EXISTS publicaciones (
     FOREIGN KEY (category_id) REFERENCES categorias(id) ON DELETE SET NULL
 );
 
--- 6. Publicaciones <-> Etiquetas (N:N)
+-- 7. Publicaciones <-> Etiquetas (N:N)
 CREATE TABLE IF NOT EXISTS publicaciones_etiquetas (
     publicacion_id INTEGER NOT NULL,
     etiqueta_id INTEGER NOT NULL,
@@ -83,7 +100,7 @@ CREATE TABLE IF NOT EXISTS publicaciones_etiquetas (
     FOREIGN KEY (etiqueta_id) REFERENCES etiquetas(id) ON DELETE CASCADE
 );
 
--- 7. Comentarios
+-- 8. Comentarios
 CREATE TABLE IF NOT EXISTS comentarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     content TEXT NOT NULL,
@@ -94,16 +111,20 @@ CREATE TABLE IF NOT EXISTS comentarios (
     FOREIGN KEY (publicacion_id) REFERENCES publicaciones(id) ON DELETE CASCADE
 );
 
--- 8. Likes
+-- 9. Likes (Sin 'cantidad', con UNIQUE en la combinación user_id/publicacion_id)
 CREATE TABLE IF NOT EXISTS likes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     publicacion_id INTEGER NOT NULL,
-    cantidad INTEGER NOT NULL DEFAULT 0,
     UNIQUE (user_id, publicacion_id),
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (publicacion_id) REFERENCES publicaciones(id) ON DELETE CASCADE
 );
+
+-- Índices de Rendimiento Adicionales
+CREATE INDEX IF NOT EXISTS idx_publicaciones_title ON publicaciones (title);
+CREATE INDEX IF NOT EXISTS idx_comentarios_date ON comentarios (creationDate);
+CREATE INDEX IF NOT EXISTS idx_publicaciones_category ON publicaciones (category_id);
 
     `);
         console.log("chamo hemos creado la base de  datos uwu");

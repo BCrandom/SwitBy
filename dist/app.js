@@ -21,6 +21,7 @@ app.set("views", path_1.default.join(__dirname, "../views"));
 app.set("view engine", "ejs");
 app.use((0, serve_favicon_1.default)(path_1.default.join(__dirname, '../views/public/imgs', 'favicon.ico')));
 // Middlewares
+app.use('/images', express_1.default.static(path_1.default.join(__dirname, '../views/public/imgs')));
 app.use((0, morgan_1.default)("dev"));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -34,10 +35,12 @@ app.use((0, express_session_1.default)({
 const registerRoute_1 = __importDefault(require("./routes/registerRoute"));
 const sessionRoute_1 = __importDefault(require("./routes/sessionRoute"));
 const mainRoute_1 = __importDefault(require("./routes/mainRoute"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 // Rutas
 app.use(registerRoute_1.default);
 app.use(sessionRoute_1.default);
 app.use(mainRoute_1.default);
+app.use(userRoutes_1.default);
 // Rutas principales
 app.get("/", (req, res) => {
     //res.send("Bienvenido");
