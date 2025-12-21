@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwitBy | Seguridad</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <style>
+        .security-card { transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+        .security-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <%- include('../partials/header') %>
+
+    <div class="container py-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-3"><i class="bi bi-shield-check me-2"></i>Seguridad de la Cuenta</h2>
+                <p class="text-muted">Gestiona tus credenciales de acceso y recuperación.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center g-4">
+            
+            <!-- OPCIÓN 1: CAMBIAR CORREO -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 security-card text-center p-4">
+                    <div class="card-body">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle mx-auto d-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
+                            <i class="bi bi-envelope-at-fill fs-1"></i>
+                        </div>
+                        <h4 class="card-title fw-bold">Correo Electrónico</h4>
+                        <p class="card-text text-muted small mb-4">
+                            Actualiza la dirección de correo asociada a tu cuenta. Te pediremos tu contraseña actual para confirmar.
+                        </p>
+                        <a href="/profile/segurity/email/<%= user.id %>" class="btn btn-outline-primary stretched-link fw-bold">
+                            Cambiar Correo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPCIÓN 2: CAMBIAR CONTRASEÑA -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 security-card text-center p-4">
+                    <div class="card-body">
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-circle mx-auto d-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
+                            <i class="bi bi-asterisk fs-1"></i>
+                        </div>
+                        <h4 class="card-title fw-bold">Contraseña</h4>
+                        <p class="card-text text-muted small mb-4">
+                            Actualiza tu clave de acceso. Asegúrate de usar una contraseña segura y diferente a la anterior.
+                        </p>
+                        <a href="/profile/segurity/password/<%= user.id %>" class="btn btn-outline-warning text-dark stretched-link fw-bold">
+                            Cambiar Contraseña
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/profile/<%= user.id %>" class="text-decoration-none text-secondary">
+                <i class="bi bi-arrow-left"></i> Volver al perfil
+            </a>
+        </div>
+    </div>
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

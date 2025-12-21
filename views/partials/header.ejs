@@ -12,7 +12,7 @@
           height="45px" 
           viewBox="0 0 476.000000 476.000000"
           preserveAspectRatio="xMinYMid meet"
-          class="me-2"
+          class="me-2 text-darkpurple"
         >
           <g
             transform="translate(0.000000,476.000000) scale(0.100000,-0.100000)"
@@ -58,7 +58,7 @@
                 <%= user ? user.username : 'Invitado' %>
             </span>
             <img
-              src="<%= user && user.avatar ? user.avatar : 'imgs/Logo.png' %>"
+              src="<%= user && user.avatar ? user.avatar : '../../../imgs/Logo.png' %>"
               alt="<%= user ? user.username : 'User' %>"
               width="40"
               height="40"
